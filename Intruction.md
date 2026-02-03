@@ -6,8 +6,8 @@ The **Customer Spending Insights Dashboard** is a professional-grade React appli
 
 ### **Live Demo Credentials**
 ```
-Email: thabo.mokoena@email.co.za
-Password: demo123
+Email: john.doe@email.com
+Password: John@26
 ```
 
 ---

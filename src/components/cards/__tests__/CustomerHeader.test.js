@@ -23,8 +23,8 @@ jest.mock('../../../utils/formatters', () => ({
 
 describe('CustomerHeader Component', () => {
   const mockCustomer = {
-    name: 'Thabo Mokoena',
-    email: 'thabo.mokoena@email.co.za',
+    name: 'John Doe',
+    email: 'john.doe@email.com',
     accountType: 'Premium',
     joinDate: '2024-01-15',
     totalSpent: 32890.25
@@ -33,8 +33,8 @@ describe('CustomerHeader Component', () => {
   it('should render customer information correctly', () => {
     render(<CustomerHeader customer={mockCustomer} />);
     
-    expect(screen.getByText('Thabo Mokoena')).toBeInTheDocument();
-    expect(screen.getByText('thabo.mokoena@email.co.za')).toBeInTheDocument();
+    expect(screen.getByText('John Doe')).toBeInTheDocument();
+    expect(screen.getByText('john.doe@email.com')).toBeInTheDocument();
     expect(screen.getByText('Premium')).toBeInTheDocument();
     expect(screen.getByText('Member since')).toBeInTheDocument();
     expect(screen.getByText('January 15, 2024')).toBeInTheDocument();
@@ -49,20 +49,20 @@ describe('CustomerHeader Component', () => {
     expect(skeletons.length).toBe(4);
     
     // Verify no actual content is shown
-    expect(screen.queryByText('Thabo Mokoena')).not.toBeInTheDocument();
+    expect(screen.queryByText('John Doe')).not.toBeInTheDocument();
     expect(screen.queryByText('Premium')).not.toBeInTheDocument();
   });
 
   it('should generate initials from name', () => {
     render(<CustomerHeader customer={mockCustomer} />);
     
-    expect(screen.getByText('TM')).toBeInTheDocument(); // Thabo Mokoena -> TM
+    expect(screen.getByText('JD')).toBeInTheDocument(); // John Doe -> TM
   });
 
   it('should handle customer with single name', () => {
     const singleNameCustomer = {
-      name: 'Thabo',
-      email: 'thabo@email.com',
+      name: 'John',
+      email: 'John@email.com',
       accountType: 'Basic',
       joinDate: '2024-01-15',
       totalSpent: 1000
@@ -70,7 +70,7 @@ describe('CustomerHeader Component', () => {
     
     render(<CustomerHeader customer={singleNameCustomer} />);
     
-    expect(screen.getByText('T')).toBeInTheDocument(); // Thabo -> T
+    expect(screen.getByText('T')).toBeInTheDocument(); // John -> T
   });
 
   it('should handle customer with no name', () => {
@@ -127,19 +127,19 @@ describe('CustomerHeader Component', () => {
     expect(screen.getByText('U')).toBeInTheDocument();
     
     // Should not crash, but fields will be empty or show defaults
-    expect(screen.queryByText('Thabo Mokoena')).not.toBeInTheDocument();
+    expect(screen.queryByText('John Doe')).not.toBeInTheDocument();
   });
 
   it('should handle undefined customer properties gracefully', () => {
     const incompleteCustomer = {
-      name: 'Thabo Mokoena'
+      name: 'John Doe'
       // Missing other properties
     };
     
     render(<CustomerHeader customer={incompleteCustomer} />);
     
-    expect(screen.getByText('Thabo Mokoena')).toBeInTheDocument();
-    expect(screen.getByText('TM')).toBeInTheDocument();
+    expect(screen.getByText('John Doe')).toBeInTheDocument();
+    expect(screen.getByText('JD')).toBeInTheDocument();
     // Should render empty strings or defaults for missing fields
     expect(screen.queryByText('Premium')).not.toBeInTheDocument();
   });

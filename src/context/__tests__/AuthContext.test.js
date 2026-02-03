@@ -102,7 +102,7 @@ describe('AuthContext', () => {
 
   it('should login successfully', async () => {
     authService.getCurrentUser.mockReturnValue(null);
-    const mockUser = { id: 'cust_12345', name: 'Thabo Mokoena', email: 'thabo.mokoena@email.co.za' };
+    const mockUser = { id: 'cust_12345', name: 'John Doe', email: 'john.doe@email.com' };
     const mockResult = { user: mockUser, token: 'test-token', expiresIn: 86400 };
     
     authService.authenticateUser.mockResolvedValue(mockResult);
@@ -128,10 +128,10 @@ describe('AuthContext', () => {
       expect(screen.getByTestId('loading')).toHaveTextContent('false');
     });
     
-    expect(authService.authenticateUser).toHaveBeenCalledWith('john.doe@email.co.za', 'John@26');
+    expect(authService.authenticateUser).toHaveBeenCalledWith('john.doe@email.com', 'John@26');
     expect(authService.storeAuthData).toHaveBeenCalledWith(mockUser, 'test-token');
     expect(screen.getByTestId('authenticated')).toHaveTextContent('true');
-    expect(screen.getByTestId('user')).toHaveTextContent('Thabo Mokoena');
+    expect(screen.getByTestId('user')).toHaveTextContent('John Doe');
     expect(screen.getByTestId('error')).toHaveTextContent('no-error');
   });
 

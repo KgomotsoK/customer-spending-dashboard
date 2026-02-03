@@ -37,9 +37,9 @@ describe('Auth Service', () => {
       {
         id: 'cust_12345',
         customerId: 'cust_12345',
-        email: 'john.doe@email.co.za',
+        email: 'john.doe@email.com',
         password: 'John@26',
-        name: 'Thabo Mokoena'
+        name: 'John Doe'
       },
       {
         id: 'cust_11111',
@@ -57,13 +57,13 @@ describe('Auth Service', () => {
     });
 
     it('should authenticate valid user credentials', async () => {
-      const result = await authenticateUser('john.doe@email.co.za', 'John@26');
+      const result = await authenticateUser('john.doe@email.com', 'John@26');
       
       expect(result.user).toBeDefined();
       expect(result.user.id).toBe('cust_12345');
       expect(result.user.customerId).toBe('cust_12345');
-      expect(result.user.name).toBe('Thabo Mokoena');
-      expect(result.user.email).toBe('john.doe@email.co.za');
+      expect(result.user.name).toBe('John Doe');
+      expect(result.user.email).toBe('john.doe@email.com');
       expect(result.user.password).toBeUndefined();
       expect(result.token).toBeDefined();
       expect(result.expiresIn).toBe(86400); // 24 hours in seconds
@@ -78,7 +78,7 @@ describe('Auth Service', () => {
 
     it('should reject invalid password', async () => {
       await expect(
-        authenticateUser('john.doe@email.co.za', 'wrongpassword')
+        authenticateUser('john.doe@email.com', 'wrongpassword')
       ).rejects.toThrow('Invalid email or password');
     });
 
@@ -99,7 +99,7 @@ describe('Auth Service', () => {
       apiClient.get.mockRejectedValue(new Error('Network error'));
       
       await expect(
-        authenticateUser('john.doe@email.co.za', 'John@26')
+        authenticateUser('john.doe@email.com', 'John@26')
       ).rejects.toThrow('Invalid email or password');
     });
   });
@@ -108,8 +108,8 @@ describe('Auth Service', () => {
     const mockUser = {
       id: 'cust_12345',
       customerId: 'cust_12345',
-      name: 'Thabo Mokoena',
-      email: 'thabo.mokoena@email.co.za'
+      name: 'John Doe',
+      email: 'john.doe@email.com'
     };
 
     const generateValidToken = () => {
