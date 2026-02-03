@@ -21,6 +21,9 @@ export const CustomerService = {
    */
   async getProfile(customerId = null) {
     const id = customerId || getCurrentCustomerId();
+    const response = await apiClient.get(`/customers/${id}/profile.json`);
+
+    console.log('Fetched customer profile:', response);
     return apiClient.get(`/customers/${id}/profile.json`);
   },
 

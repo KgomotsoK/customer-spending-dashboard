@@ -1,13 +1,11 @@
 // src/components/feedback/ErrorFallback.jsx
 import { AlertTriangle, Home, RefreshCw } from 'lucide-react';
-import { useNavigate } from 'react-router-dom';
 import '../../styles/main.css';
 
 const ErrorFallback = ({ error, resetErrorBoundary }) => {
-  const navigate = useNavigate();
-  
+  // Remove useNavigate and use window.location directly
   const handleGoHome = () => {
-    navigate('/dashboard');
+    window.location.href = '/dashboard';
     resetErrorBoundary();
   };
 
@@ -29,7 +27,7 @@ const ErrorFallback = ({ error, resetErrorBoundary }) => {
             {error?.message || 'An unexpected error occurred'}
           </p>
           
-          {process.env.NODE_ENV === 'development' && error?.stack && (
+          {import.meta.env.NODE_ENV === 'development' && error?.stack && (
             <details className="error-fallback__stack">
               <summary>Error details</summary>
               <pre>{error.stack}</pre>

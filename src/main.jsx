@@ -1,3 +1,4 @@
+// src/main.jsx
 import React from 'react';
 import ReactDOM from 'react-dom/client';
 import { registerSW } from 'virtual:pwa-register';
@@ -18,7 +19,7 @@ const updateSW = registerSW({
 
 // Performance monitoring
 const reportWebVitals = (metric) => {
-  if (process.env.NODE_ENV === 'production') {
+  if (import.meta.env.NODE_ENV === 'production') {
     // Send metrics to analytics service
     const body = JSON.stringify(metric);
     navigator.sendBeacon('/api/analytics/performance', body);
@@ -29,10 +30,10 @@ const reportWebVitals = (metric) => {
 
 // Initialize Sentry (if configured)
 const initializeErrorTracking = () => {
-  if (process.env.REACT_APP_SENTRY_DSN) {
+  if (import.meta.env.REACT_APP_SENTRY_DSN) {
     import('@sentry/react').then((Sentry) => {
       Sentry.init({
-        dsn: process.env.REACT_APP_SENTRY_DSN,
+        dsn: import.meta.env.REACT_APP_SENTRY_DSN,
         integrations: [
           new Sentry.BrowserTracing({
             tracePropagationTargets: ["localhost", /^https:\/\/yourdomain\.com/],
@@ -97,10 +98,10 @@ const renderApp = () => {
 };
 
 // Initialize error tracking
-initializeErrorTracking();
+//initializeErrorTracking();
 
 // Start the application
-if (process.env.NODE_ENV === 'production') {
+if (import.meta.env.NODE_ENV === 'production') {
   // Production startup with performance monitoring
   import('web-vitals').then(({ onCLS, onFID, onFCP, onLCP, onTTFB }) => {
     onCLS(reportWebVitals);

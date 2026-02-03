@@ -211,34 +211,7 @@ const LoginPage = () => {
             </button>
           </form>
 
-          {/* Demo Section */}
-          <div className="demo-section">
-            <div className="demo-section__header">
-              <Shield size={20} className="demo-section__icon" />
-              <h3 className="demo-section__title">Try Demo Mode</h3>
-            </div>
-            <p className="demo-section__description">
-              Experience the dashboard with sample data. Perfect for testing features and exploring insights.
-            </p>
-            <button
-              type="button"
-              className="button button--outline button--sm"
-              onClick={handleDemoLogin}
-              disabled={isLoading}
-            >
-              Use Demo Credentials
-            </button>
-            <div className="demo-credentials">
-              <div className="demo-credential">
-                <strong>Email:</strong> 
-                <code className="demo-credential__value">thabo.mokoena@email.co.za</code>
-              </div>
-              <div className="demo-credential">
-                <strong>Password:</strong> 
-                <code className="demo-credential__value">demo123</code>
-              </div>
-            </div>
-          </div>
+      
 
           {/* Security Notice */}
           <div className="security-notice">

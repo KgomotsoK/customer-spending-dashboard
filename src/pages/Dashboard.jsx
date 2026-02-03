@@ -291,7 +291,7 @@ const Dashboard = () => {
         </section>
 
         {/* Demo Notice */}
-        {process.env.NODE_ENV === 'development' && (
+        {import.meta.env.NODE_ENV === 'development' && (
           <section className="dashboard__section">
             <div className="alert alert--info">
               <AlertCircle size={20} />
@@ -315,7 +315,7 @@ const Dashboard = () => {
             <a href="#" className="footer__link">Terms of Service</a>
             <a href="#" className="footer__link">Contact Support</a>
             <span className="footer__version">
-              v{process.env.REACT_APP_VERSION || '1.0.0'}
+              v{import.meta.env.REACT_APP_VERSION || '1.0.0'}
             </span>
           </div>
         </div>

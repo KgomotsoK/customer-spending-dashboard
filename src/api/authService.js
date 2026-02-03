@@ -54,9 +54,9 @@ export const authenticateUser = async (email, password) => {
   try {
     // Fetch all users from the API
     const users = await apiClient.get('/customers/customers.json');
-    
+    console.log('Fetched users for authentication:', users);
     // Find matching user
-    const user = users.find(u => 
+    const user = users.data.find(u => 
       u.email.toLowerCase() === email.toLowerCase() && 
       u.password === password // would compare hashed passwords
     );

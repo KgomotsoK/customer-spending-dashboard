@@ -9,14 +9,13 @@ import Header from './components/layout/Header';
 import { ToastProvider } from './components/ui/Toast';
 import { AuthProvider, useAuth } from './context/AuthContext';
 import { DashboardProvider } from './context/DashboardContext';
-import MaintenancePage from './pages/MaintenancePage';
+import MaintenancePage from './pages/MaintanancePage';
 import NotFoundPage from './pages/NotFoundPage';
 import './styles/main.css';
 
 // Lazy load pages for better performance
 const Dashboard = lazy(() => import('./pages/Dashboard'));
 const LoginPage = lazy(() => import('./pages/LoginPage'));
-const SettingsPage = lazy(() => import('./pages/SettingsPage'));
 
 // Create query client with production configuration
 const queryClient = new QueryClient({
@@ -109,7 +108,6 @@ const MainLayout = () => {
           <Suspense fallback={<LoadingScreen />}>
             <Routes>
               <Route path="/dashboard" element={<Dashboard />} />
-              <Route path="/settings" element={<SettingsPage />} />
               <Route path="/" element={<Navigate to="/dashboard" replace />} />
             </Routes>
           </Suspense>
@@ -120,13 +118,13 @@ const MainLayout = () => {
 };
 
 // Check for maintenance mode
-const isMaintenanceMode = process.env.REACT_APP_MAINTENANCE_MODE === 'true';
+const isMaintenanceMode = import.meta.env.REACT_APP_MAINTENANCE_MODE === 'true';
 
 // Main App component
 function App() {
   // Add performance monitoring
   React.useEffect(() => {
-    if (process.env.NODE_ENV === 'production') {
+    if (import.meta.env.NODE_ENV === 'production') {
       // Initialize performance monitoring
       const observer = new PerformanceObserver((list) => {
         list.getEntries().forEach((entry) => {
@@ -195,7 +193,7 @@ function App() {
       </ToastProvider>
       
       {/* React Query DevTools (development only) */}
-      {process.env.NODE_ENV === 'development' && (
+      {import.meta.env.NODE_ENV === 'development' && (
         <ReactQueryDevtools 
           initialIsOpen={false}
           position="bottom-right"
