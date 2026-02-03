@@ -22,7 +22,6 @@ const CustomerHeader = ({ customer, loading = false }) => {
     );
   }
 
-  console.log('Customer Data:', customer);
 
   const initials = customer?.name
     ?.split(' ')
