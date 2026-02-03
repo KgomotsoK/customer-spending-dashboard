@@ -1,4 +1,3 @@
-// src/components/cards/KpiCard.jsx
 import { TrendingDown, TrendingUp } from 'lucide-react';
 import '../../styles/main.css';
 

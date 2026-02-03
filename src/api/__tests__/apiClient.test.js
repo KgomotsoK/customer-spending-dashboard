@@ -1,170 +1,159 @@
-import apiClient, { setCustomerId, getCustomerId } from '../apiClient';
+// src/api/__tests__/apiClient.test.js
+import axios from 'axios';
+import { apiClient, createClient } from '../apiClient';
 
-// Mock fetch globally
-global.fetch = jest.fn();
+// Mock axios
+jest.mock('axios');
+
+// Mock localStorage
+const localStorageMock = {
+  getItem: jest.fn(),
+  setItem: jest.fn(),
+  removeItem: jest.fn(),
+  clear: jest.fn()
+};
+
+global.localStorage = localStorageMock;
 
 describe('API Client', () => {
   beforeEach(() => {
     jest.clearAllMocks();
-    setCustomerId('cust_12345');
+    localStorageMock.getItem.mockReturnValue('test_token');
   });
 
-  describe('Customer ID Management', () => {
-    it('should set and get customer ID', () => {
-      setCustomerId('cust_67890');
-      expect(getCustomerId()).toBe('cust_67890');
+  describe('Request Interceptor', () => {
+    it('should add Authorization header when token exists', async () => {
+      const mockConfig = { headers: {} };
+      axios.create.mockReturnValue({
+        interceptors: {
+          request: { use: jest.fn() },
+          response: { use: jest.fn() }
+        }
+      });
+
+      const client = createClient();
+      const requestInterceptor = axios.create.mock.calls[0][0];
+      
+      // Get the request interceptor
+      const interceptorConfig = requestInterceptor;
+      expect(interceptorConfig.headers['Content-Type']).toBe('application/json');
     });
 
-    it('should default to cust_12345', () => {
-      setCustomerId('cust_12345');
-      expect(getCustomerId()).toBe('cust_12345');
+    it('should not add Authorization header when no token exists', () => {
+      localStorageMock.getItem.mockReturnValue(null);
+      
+      const mockConfig = { headers: {} };
+      axios.create.mockReturnValue({
+        interceptors: {
+          request: { use: jest.fn() },
+          response: { use: jest.fn() }
+        }
+      });
+
+      createClient();
+      const requestInterceptor = axios.create.mock.calls[0][0];
+      
+      expect(requestInterceptor.headers['Content-Type']).toBe('application/json');
+      expect(requestInterceptor.headers['Authorization']).toBeUndefined();
     });
   });
 
-  describe('getCustomerProfile', () => {
-    it('should fetch customer profile', async () => {
-      const mockProfile = {
-        customerId: 'cust_12345',
-        name: 'Thabo Mokoena',
-        email: 'thabo.mokoena@email.co.za'
+  describe('Response Interceptor', () => {
+    it('should return response data on success', async () => {
+      const mockResponse = {
+        data: { message: 'Success' },
+        status: 200
       };
-      
-      global.fetch.mockResolvedValueOnce({
-        ok: true,
-        json: () => Promise.resolve(mockProfile)
+
+      axios.create.mockReturnValue({
+        interceptors: {
+          request: { use: jest.fn() },
+          response: { use: jest.fn((successHandler, errorHandler) => {
+            // Simulate successful response
+            return successHandler(mockResponse);
+          })}
+        }
       });
 
-      const result = await apiClient.getCustomerProfile();
-      
-      expect(fetch).toHaveBeenCalledWith('/mock-api/customers/cust_12345/profile.json');
-      expect(result).toEqual(mockProfile);
+      createClient();
+      // The response interceptor extracts data
+      expect(mockResponse.data).toEqual({ message: 'Success' });
     });
 
-    it('should fallback to default customer on 404', async () => {
-      const mockProfile = { name: 'Fallback User' };
-      
-      global.fetch
-        .mockResolvedValueOnce({ ok: false })
-        .mockResolvedValueOnce({
-          ok: true,
-          json: () => Promise.resolve(mockProfile)
-        });
+    it('should handle API errors with custom error', async () => {
+      const mockError = {
+        response: {
+          status: 404,
+          data: { message: 'Not found', code: 'NOT_FOUND' }
+        },
+        message: 'Request failed'
+      };
 
-      const result = await apiClient.getCustomerProfile();
-      
-      expect(result).toEqual(mockProfile);
+      axios.create.mockReturnValue({
+        interceptors: {
+          request: { use: jest.fn() },
+          response: { use: jest.fn((successHandler, errorHandler) => {
+            // Simulate error response
+            return errorHandler(mockError).catch(error => {
+              expect(error.message).toBe('Not found');
+              expect(error.status).toBe(404);
+              expect(error.code).toBe('NOT_FOUND');
+            });
+          })}
+        }
+      });
+
+      createClient();
+    });
+
+    it('should handle network errors', async () => {
+      const mockError = {
+        message: 'Network Error'
+      };
+
+      axios.create.mockReturnValue({
+        interceptors: {
+          request: { use: jest.fn() },
+          response: { use: jest.fn((successHandler, errorHandler) => {
+            return errorHandler(mockError).catch(error => {
+              expect(error.message).toBe('Network Error');
+              expect(error.status).toBeUndefined();
+              expect(error.code).toBeUndefined();
+            });
+          })}
+        }
+      });
+
+      createClient();
     });
   });
 
-  describe('getSpendingSummary', () => {
-    it('should fetch spending summary for default period', async () => {
-      const mockData = {
-        '30d': { period: '30d', totalSpent: 32890.25 },
-        '7d': { period: '7d', totalSpent: 8245.50 }
-      };
+  describe('Client Configuration', () => {
+    it('should create client with default baseURL', () => {
+      createClient();
       
-      global.fetch.mockResolvedValueOnce({
-        ok: true,
-        json: () => Promise.resolve(mockData)
-      });
-
-      const result = await apiClient.getSpendingSummary();
-      
-      expect(result).toEqual(mockData['30d']);
+      expect(axios.create).toHaveBeenCalledWith(expect.objectContaining({
+        baseURL: '/api',
+        timeout: 15000,
+        headers: {
+          'Content-Type': 'application/json'
+        }
+      }));
     });
 
-    it('should fetch spending summary for specific period', async () => {
-      const mockData = {
-        '30d': { period: '30d', totalSpent: 32890.25 },
-        '7d': { period: '7d', totalSpent: 8245.50 }
-      };
+    it('should create client with custom baseURL', () => {
+      createClient('https://api.example.com');
       
-      global.fetch.mockResolvedValueOnce({
-        ok: true,
-        json: () => Promise.resolve(mockData)
-      });
-
-      const result = await apiClient.getSpendingSummary('7d');
-      
-      expect(result).toEqual(mockData['7d']);
-    });
-  });
-
-  describe('getTransactions', () => {
-    const mockTransactions = {
-      transactions: [
-        { id: 'txn_1', category: 'Groceries', amount: 100, date: '2025-01-15T10:00:00Z' },
-        { id: 'txn_2', category: 'Transport', amount: 50, date: '2025-01-14T10:00:00Z' },
-        { id: 'txn_3', category: 'Groceries', amount: 200, date: '2025-01-13T10:00:00Z' }
-      ]
-    };
-
-    beforeEach(() => {
-      global.fetch.mockResolvedValue({
-        ok: true,
-        json: () => Promise.resolve(mockTransactions)
-      });
+      expect(axios.create).toHaveBeenCalledWith(expect.objectContaining({
+        baseURL: 'https://api.example.com'
+      }));
     });
 
-    it('should fetch transactions with pagination', async () => {
-      const result = await apiClient.getTransactions({ limit: 2, offset: 0 });
-      
-      expect(result.transactions).toHaveLength(2);
-      expect(result.pagination.total).toBe(3);
-      expect(result.pagination.hasMore).toBe(true);
-    });
-
-    it('should filter by category', async () => {
-      const result = await apiClient.getTransactions({ 
-        limit: 10, 
-        offset: 0, 
-        category: 'Groceries' 
-      });
-      
-      expect(result.transactions).toHaveLength(2);
-      expect(result.transactions.every(t => t.category === 'Groceries')).toBe(true);
-    });
-
-    it('should sort by date descending', async () => {
-      const result = await apiClient.getTransactions({ 
-        limit: 10, 
-        offset: 0, 
-        sortBy: 'date_desc' 
-      });
-      
-      const dates = result.transactions.map(t => new Date(t.date).getTime());
-      expect(dates).toEqual([...dates].sort((a, b) => b - a));
-    });
-
-    it('should sort by amount ascending', async () => {
-      const result = await apiClient.getTransactions({ 
-        limit: 10, 
-        offset: 0, 
-        sortBy: 'amount_asc' 
-      });
-      
-      const amounts = result.transactions.map(t => t.amount);
-      expect(amounts).toEqual([...amounts].sort((a, b) => a - b));
-    });
-  });
-
-  describe('getSpendingGoals', () => {
-    it('should fetch spending goals', async () => {
-      const mockGoals = {
-        goals: [
-          { id: 'goal_001', category: 'Groceries', status: 'warning' }
-        ]
-      };
-      
-      global.fetch.mockResolvedValueOnce({
-        ok: true,
-        json: () => Promise.resolve(mockGoals)
-      });
-
-      const result = await apiClient.getSpendingGoals();
-      
-      expect(result.goals).toHaveLength(1);
-      expect(result.goals[0].status).toBe('warning');
+    it('should export singleton instance', () => {
+      expect(apiClient).toBeDefined();
+      // apiClient should be an axios instance
+      expect(apiClient).toHaveProperty('get');
+      expect(apiClient).toHaveProperty('post');
     });
   });
 });

@@ -1,4 +1,3 @@
-// src/components/cards/CustomerHeader.jsx
 import { CalendarDays, Wallet } from 'lucide-react';
 import '../../styles/main.css';
 import { formatCurrency, formatDate } from '../../utils/formatters';

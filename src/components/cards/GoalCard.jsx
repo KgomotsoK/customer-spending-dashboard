@@ -1,4 +1,3 @@
-// src/components/cards/GoalCard.jsx
 import { AlertTriangle, CheckCircle2, Clock } from 'lucide-react';
 import '../../styles/main.css';
 import { formatCurrency } from '../../utils/formatters';
