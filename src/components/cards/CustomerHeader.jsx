@@ -22,6 +22,8 @@ const CustomerHeader = ({ customer, loading = false }) => {
     );
   }
 
+  console.log('Customer Data:', customer);
+
   const initials = customer?.name
     ?.split(' ')
     .map(n => n[0])
@@ -29,9 +31,9 @@ const CustomerHeader = ({ customer, loading = false }) => {
     .toUpperCase() || 'U';
 
   return (
-    <div className="customer-header">
-      <div className="customer-header__profile">
-        <div className="customer-header__avatar">
+    <div className="customer-header" >
+      <div className="customer-header__profile" >
+        <div className="customer-header__avatar" >
           {initials}
         </div>
         <div className="customer-header__info">

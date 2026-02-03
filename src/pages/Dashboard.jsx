@@ -52,6 +52,7 @@ const Dashboard = () => {
     refetch: refetchCustomer,
     error: customerError 
   } = useCustomerProfile();
+
   
   const { 
     data: summary, 
