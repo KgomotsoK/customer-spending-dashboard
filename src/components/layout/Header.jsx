@@ -131,53 +131,16 @@ const Header = () => {
           <div className="header__action" ref={notificationRef}>
             <button
               className="icon-button icon-button--notification"
-              onClick={() => setShowNotifications(!showNotifications)}
+              onClick={() => setShowNotifications({/* Toggle notification dropdown */})}
               aria-label="Notifications"
               title="Notifications"
             >
               <Bell size={20} />
               {unreadNotifications > 0 && (
                 <span className="icon-button__badge">
-                  {unreadNotifications}
                 </span>
               )}
             </button>
-
-            {showNotifications && (
-              <div className="dropdown dropdown--notifications">
-                <div className="dropdown__header">
-                  <h3 className="dropdown__title">Notifications</h3>
-                  <button 
-                    className="dropdown__clear"
-                    onClick={clearNotifications}
-                  >
-                    Clear all
-                  </button>
-                </div>
-                <div className="dropdown__content">
-                  {mockNotifications.map((notification) => (
-                    <div 
-                      key={notification.id} 
-                      className={`notification ${!notification.read ? 'notification--unread' : ''}`}
-                    >
-                      <div className="notification__content">
-                        <div className="notification__title">{notification.title}</div>
-                        <div className="notification__description">{notification.description}</div>
-                        <div className="notification__time">{notification.time}</div>
-                      </div>
-                      {!notification.read && (
-                        <div className="notification__indicator"></div>
-                      )}
-                    </div>
-                  ))}
-                </div>
-                <div className="dropdown__footer">
-                  <button className="button button--ghost button--sm">
-                    View all notifications
-                  </button>
-                </div>
-              </div>
-            )}
           </div>
 
           {/* Theme Toggle */}
@@ -194,7 +157,7 @@ const Header = () => {
 
           {/* User Profile Dropdown */}
           {user && (
-            <div className="header__action" ref={userMenuRef}>
+            <div className="header__action" ref={userMenuRef} >
               <button
                 className="header__user-trigger"
                 onClick={() => setShowUserMenu(!showUserMenu)}
@@ -204,10 +167,6 @@ const Header = () => {
                 <div className="header__user-avatar">
                   {user.name?.split(' ').map(n => n[0]).join('').toUpperCase() || 'U'}
                 </div>
-                <div className="header__user-info">
-                  <span className="header__user-name">{user.name}</span>
-                  <span className="header__user-email">{user.email}</span>
-                </div>
                 <ChevronDown size={16} className={`header__user-chevron ${showUserMenu ? 'header__user-chevron--open' : ''}`} />
               </button>
 
@@ -216,7 +175,10 @@ const Header = () => {
                   <div className="dropdown__content">
                     <div className="dropdown__section">
                       <div className="dropdown__header">
-                        <h3 className="dropdown__title">Account</h3>
+                      
+                <div className="header__user-info">
+                  <span className="header__user-name">{user.name}</span>
+                </div>
                       </div>
                       <div className="dropdown__item">
                         <User size={16} />
