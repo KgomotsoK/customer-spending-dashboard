@@ -27,7 +27,6 @@ This project is a responsive financial analytics dashboard that displays custome
 - Clean, minimal, banking-grade UI
 
 ### Data & State
-- **TanStack Query (React Query)** - API data handling with caching
 - **React Context** - Authentication and shared UI state
 
 ### Charts & Visualization
@@ -40,7 +39,7 @@ This project is a responsive financial analytics dashboard that displays custome
 - Unit tests for utilities, contexts, and components
 
 ### API Mocking
-- **Static JSON Files** - Mock API endpoints served from `/mock-api/`
+- **Static JSON Files** - Mock API endpoints served from `/api/`
 - Simulates real API responses following the Capitec API specification
 
 ## Folder Structure
@@ -124,7 +123,7 @@ yarn start
 4. Open [http://localhost:3000](http://localhost:3000) in your browser
 
 ### Demo Credentials
-- Email: `john.doe@email.co.za`
+- Email: `john.doe@email.com`
 - Password: `John@26`
 
 
@@ -145,12 +144,12 @@ yarn test src/api/__tests__/authService.test.js
 
 ### Build the Docker image:
 ```bash
-docker build -t spending-insights .
+docker build -t spending-insights-main .
 ```
 
 ### Run the container:
 ```bash
-docker run -p 3000:3000 spending-insights
+docker run -p 3000:3000 spending-insights-main
 ```
 
 ### Access the application:
