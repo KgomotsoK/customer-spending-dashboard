@@ -1,4 +1,3 @@
-// src/components/charts/TrendChart.jsx
 import {
   BarElement,
   CategoryScale,

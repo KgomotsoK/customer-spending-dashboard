@@ -1,4 +1,3 @@
-// src/api/__tests__/authService.test.js
 import { apiClient } from '../apiClient';
 import { authenticateUser, clearAuthStorage, getCurrentUser, isAuthenticated, storeAuthData } from '../authService';
 

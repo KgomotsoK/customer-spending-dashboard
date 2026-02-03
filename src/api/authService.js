@@ -14,12 +14,7 @@ const generateSecureToken = (userId) => {
   const random = Math.random().toString(36).substring(2);
   
   // Create token with user ID, expiration, and random component
-  const tokenData = {
-    userId,
-    expiresAt,
-    random,
-    timestamp
-  };
+  const tokenData = { userId, expiresAt, random, timestamp };
   
   // JWT signed with a secret
   return btoa(JSON.stringify(tokenData));
@@ -30,7 +25,7 @@ const generateSecureToken = (userId) => {
  */
 const validateToken = (token) => {
   if (!token) return null;
-  
+
   try {
     const decoded = JSON.parse(atob(token));
     
@@ -52,23 +47,47 @@ const validateToken = (token) => {
  */
 export const authenticateUser = async (email, password) => {
   try {
+    // Input validation
+    if (!email || !email.trim()) {
+      const error = new Error('Email address is required');
+      error.field = 'email';
+      throw error;
+    }
+
+    if (!password) {
+      const error = new Error('Password is required');
+      error.field = 'password';
+      throw error;
+    }
+
     // Fetch all users from the API
     const users = await apiClient.get('/customers/customers.json');
-    // Find matching user
-    const user = users.data.find(u => 
-      u.email.toLowerCase() === email.toLowerCase() && 
-      u.password === password // would compare hashed passwords
+    
+    // Check if email exists
+    const userWithEmail = users.data.find(u => 
+      u.email.toLowerCase() === email.toLowerCase()
     );
-    
-    if (!user) {
-      throw new Error('Invalid email or password');
+
+    if (!userWithEmail) {
+      const error = new Error('No account found with this email address');
+      error.field = 'email';
+      error.code = 'EMAIL_NOT_FOUND';
+      throw error;
     }
-    
+
+    // Check if password matches
+    if (userWithEmail.password !== password) {
+      const error = new Error('Incorrect password');
+      error.field = 'password';
+      error.code = 'INVALID_PASSWORD';
+      throw error;
+    }
+
     // Remove password from user object
-    const { password: _, ...userWithoutPassword } = user;
+    const { password: _, ...userWithoutPassword } = userWithEmail;
     
     // Generate secure token
-    const token = generateSecureToken(user.id);
+    const token = generateSecureToken(userWithEmail.id);
     
     return {
       user: userWithoutPassword,
@@ -77,7 +96,16 @@ export const authenticateUser = async (email, password) => {
     };
   } catch (error) {
     console.error('Authentication error:', error);
-    throw new Error('Invalid email or password');
+    
+    // Re-throw with proper error details
+    if (error.field || error.code) {
+      throw error;
+    }
+    
+    // Generic error for network/API issues
+    const genericError = new Error('Unable to sign in. Please try again.');
+    genericError.code = 'AUTHENTICATION_FAILED';
+    throw genericError;
   }
 };
 

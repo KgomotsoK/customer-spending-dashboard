@@ -1,4 +1,3 @@
-// src/components/feedback/ErrorFallback.jsx
 import { AlertTriangle, Home, RefreshCw } from 'lucide-react';
 import '../../styles/main.css';
 

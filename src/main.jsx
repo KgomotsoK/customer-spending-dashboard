@@ -1,4 +1,3 @@
-// src/main.jsx
 import React from 'react';
 import ReactDOM from 'react-dom/client';
 import { registerSW } from 'virtual:pwa-register';
@@ -13,7 +12,6 @@ const updateSW = registerSW({
     }
   },
   onOfflineReady() {
-    console.log('App ready to work offline');
   },
 });
 
@@ -25,27 +23,6 @@ const reportWebVitals = (metric) => {
     navigator.sendBeacon('/api/analytics/performance', body);
   }
   
-  console.log(metric);
-};
-
-// Initialize Sentry (if configured)
-const initializeErrorTracking = () => {
-  if (import.meta.env.REACT_APP_SENTRY_DSN) {
-    import('@sentry/react').then((Sentry) => {
-      Sentry.init({
-        dsn: import.meta.env.REACT_APP_SENTRY_DSN,
-        integrations: [
-          new Sentry.BrowserTracing({
-            tracePropagationTargets: ["localhost", /^https:\/\/yourdomain\.com/],
-          }),
-          new Sentry.Replay(),
-        ],
-        tracesSampleRate: 1.0,
-        replaysSessionSampleRate: 0.1,
-        replaysOnErrorSampleRate: 1.0,
-      });
-    });
-  }
 };
 
 // Create root with error handling

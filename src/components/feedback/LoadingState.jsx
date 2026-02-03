@@ -1,4 +1,3 @@
-// src/components/feedback/LoadingState.jsx
 import { Loader } from 'lucide-react';
 
 const LoadingState = ({ 

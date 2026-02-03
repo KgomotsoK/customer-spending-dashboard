@@ -50,11 +50,20 @@ export const AuthProvider = ({ children }) => {
       
       // Update state
       setUser(result.user);
+      setError(null); // Clear any previous errors
       
       return result.user;
     } catch (err) {
-      setError(err.message || 'Login failed');
-      throw err;
+      // Set error in context
+      const errorMessage = err.message || 'Login failed';
+      setError(errorMessage);
+      
+      // Re-throw the error with all details so LoginPage can handle it
+      const enhancedError = new Error(errorMessage);
+      enhancedError.field = err.field;
+      enhancedError.code = err.code;
+      
+      throw enhancedError;
     } finally {
       setIsLoading(false);
     }

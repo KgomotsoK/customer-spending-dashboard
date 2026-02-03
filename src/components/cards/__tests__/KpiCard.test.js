@@ -1,4 +1,3 @@
-// src/components/cards/__tests__/KpiCard.test.js
 import { render, screen } from '@testing-library/react';
 import KpiCard from '../KpiCard';
 

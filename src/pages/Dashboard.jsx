@@ -1,4 +1,3 @@
-// src/pages/Dashboard.jsx
 import {
   CreditCard,
   Tag,

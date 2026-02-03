@@ -1,4 +1,3 @@
-// src/components/cards/__tests__/GoalCard.test.js
 import { render, screen } from '@testing-library/react';
 import GoalCard from '../GoalCard';
 

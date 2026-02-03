@@ -1,4 +1,3 @@
-// src/components/feedback/ErrorState.jsx
 import { AlertCircle, LogOut, RefreshCw } from 'lucide-react';
 
 const ErrorState = ({ 
