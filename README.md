@@ -124,12 +124,9 @@ yarn start
 4. Open [http://localhost:3000](http://localhost:3000) in your browser
 
 ### Demo Credentials
-- Email: `thabo.mokoena@email.co.za`
-- Password: `demo123`
+- Email: `john.doe@email.co.za`
+- Password: `John@26`
 
-Or use:
-- Email: `demo@capitec.co.za`
-- Password: `password`
 
 ## Running Tests
 

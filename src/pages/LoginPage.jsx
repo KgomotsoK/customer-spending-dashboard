@@ -90,30 +90,6 @@ const LoginPage = () => {
     }
   };
 
-  const handleDemoLogin = async () => {
-    setEmail('thabo.mokoena@email.co.za');
-    setPassword('demo123');
-    
-    // Small delay for better UX
-    setTimeout(async () => {
-      try {
-        await login('thabo.mokoena@email.co.za', 'demo123');
-        toast({
-          title: "Demo session started",
-          description: "You're now viewing sample data for demonstration purposes.",
-          duration: 4000,
-        });
-      } catch (err) {
-        toast({
-          title: "Demo login failed",
-          description: err.message || "Unable to start demo session.",
-          variant: "destructive",
-          duration: 5000,
-        });
-      }
-    }, 300);
-  };
-
   const displayError = localError || error;
 
   return (

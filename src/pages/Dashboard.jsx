@@ -1,6 +1,5 @@
 // src/pages/Dashboard.jsx
 import {
-  AlertCircle,
   CreditCard,
   Tag,
   TrendingUp,
@@ -31,20 +30,11 @@ const Dashboard = () => {
   const { 
     selectedPeriod,
     setSelectedPeriod,
-    categoryFilter,
-    setCategoryFilter,
     dateRange,
-    setdateRange,
-    sortBy,
-    setSortBy,
-    resetFilters,
-    hasActiveFilters
   } = useDashboard();
   
   const { 
-    user, 
     isAuthenticated, 
-    logout 
   } = useAuth();
 
   // Fetch all data using your existing hooks
@@ -265,19 +255,6 @@ const Dashboard = () => {
         <section className="dashboard__section">
           <TransactionsTable />
         </section>
-
-        {/* Demo Notice */}
-        {import.meta.env.NODE_ENV === 'development' && (
-          <section className="dashboard__section">
-            <div className="alert alert--info">
-              <AlertCircle size={20} />
-              <div className="alert__content">
-                <strong>Demo Mode:</strong> This dashboard displays mock data for demonstration purposes. 
-                All financial amounts are simulated.
-              </div>
-            </div>
-          </section>
-        )}
       </main>
 
       {/* Footer */}

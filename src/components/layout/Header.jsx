@@ -12,13 +12,11 @@ const Header = () => {
       (!localStorage.getItem('theme') && window.matchMedia('(prefers-color-scheme: dark)').matches);
   });
   const [showUserMenu, setShowUserMenu] = useState(false);
-  const [showNotifications, setShowNotifications] = useState(false);
   const [unreadNotifications, setUnreadNotifications] = useState(3);
   
   const { user, logout } = useAuth();
   const { toast } = useToast();
   const userMenuRef = useRef(null);
-  const notificationRef = useRef(null);
 
   // Initialize theme
   useEffect(() => {
@@ -36,9 +34,6 @@ const Header = () => {
     const handleClickOutside = (event) => {
       if (userMenuRef.current && !userMenuRef.current.contains(event.target)) {
         setShowUserMenu(false);
-      }
-      if (notificationRef.current && !notificationRef.current.contains(event.target)) {
-        setShowNotifications(false);
       }
     };
 
@@ -72,42 +67,6 @@ const Header = () => {
     }
   };
 
-  const clearNotifications = () => {
-    setUnreadNotifications(0);
-    setShowNotifications(false);
-    toast({
-      title: "Notifications cleared",
-      description: "All notifications have been marked as read.",
-      duration: 3000,
-    });
-  };
-
-  const mockNotifications = [
-    {
-      id: 1,
-      title: "Spending alert",
-      description: "You're approaching your Entertainment budget limit",
-      time: "10 min ago",
-      read: false,
-      type: "warning"
-    },
-    {
-      id: 2,
-      title: "New feature",
-      description: "Goal tracking now available",
-      time: "2 hours ago",
-      read: false,
-      type: "info"
-    },
-    {
-      id: 3,
-      title: "Weekly summary",
-      description: "Your weekly spending report is ready",
-      time: "1 day ago",
-      read: true,
-      type: "info"
-    }
-  ];
 
   return (
     <header className="header">
@@ -128,7 +87,7 @@ const Header = () => {
         {/* Actions Section */}
         <div className="header__actions">
           {/* Notifications Dropdown */}
-          <div className="header__action" ref={notificationRef}>
+          <div className="header__action">
             <button
               className="icon-button icon-button--notification"
               onClick={() => setShowNotifications({/* Toggle notification dropdown */})}

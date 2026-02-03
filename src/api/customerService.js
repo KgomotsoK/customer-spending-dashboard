@@ -82,7 +82,7 @@ export const CustomerService = {
     
     const id = customerId || getCurrentCustomerId();
     
-    // Fetch all transactions and process client-side for demo
+    // Fetch all transactions and process client-side
     const data = await apiClient.get(`/customers/${id}/transactions.json`);
     
     return processTransactions(data.transactions, {

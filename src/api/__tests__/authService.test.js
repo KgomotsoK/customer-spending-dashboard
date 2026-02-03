@@ -1,9 +1,9 @@
-import { authenticateUser, validateToken, mockUsers } from '../authService';
+import { authenticateUser, mockUsers, validateToken } from '../authService';
 
 describe('Auth Service', () => {
   describe('authenticateUser', () => {
     it('should authenticate valid user credentials', async () => {
-      const result = await authenticateUser('thabo.mokoena@email.co.za', 'demo123');
+      const result = await authenticateUser('john.doe@email.co.za', 'John@26');
       
       expect(result.user).toBeDefined();
       expect(result.user.id).toBe('cust_12345');
@@ -14,20 +14,20 @@ describe('Auth Service', () => {
     });
 
     it('should authenticate with case-insensitive email', async () => {
-      const result = await authenticateUser('THABO.MOKOENA@EMAIL.CO.ZA', 'demo123');
+      const result = await authenticateUser('JOHN.DOE@EMAIL.CO.ZA', 'John@26');
       
       expect(result.user.id).toBe('cust_12345');
     });
 
     it('should reject invalid password', async () => {
       await expect(
-        authenticateUser('thabo.mokoena@email.co.za', 'wrongpassword')
+        authenticateUser('john.doe@email.co.za', 'wrongpassword')
       ).rejects.toThrow('Invalid email or password');
     });
 
     it('should reject non-existent email', async () => {
       await expect(
-        authenticateUser('nonexistent@email.com', 'demo123')
+        authenticateUser('nonexistent@email.com', 'John@26')
       ).rejects.toThrow('Invalid email or password');
     });
 

@@ -1,4 +1,3 @@
-import React from 'react';
 import { render, screen, waitFor } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import { AuthProvider, useAuth } from '../AuthContext';
@@ -13,7 +12,7 @@ const TestComponent = () => {
       <div data-testid="authenticated">{isAuthenticated ? 'authenticated' : 'not-authenticated'}</div>
       <div data-testid="user">{user ? user.name : 'no-user'}</div>
       <div data-testid="error">{error || 'no-error'}</div>
-      <button onClick={() => login('thabo.mokoena@email.co.za', 'demo123')}>Login</button>
+      <button onClick={() => login('john.doe@email.co.za', 'John@26')}>Login</button>
       <button onClick={() => login('wrong@email.com', 'wrong')}>Bad Login</button>
       <button onClick={logout}>Logout</button>
     </div>
