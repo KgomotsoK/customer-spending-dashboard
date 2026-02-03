@@ -139,7 +139,7 @@ const CategoryPieChart = ({ data, loading = false, currency = 'ZAR' }) => {
             
             {/* Chart annotations */}
             {selectedCategory && (
-              <div className="chart-annotation">
+              <div className="chart-annotation" >
                 <div 
                   className="chart-annotation__dot"
                   style={{ backgroundColor: selectedCategory.color }}
@@ -168,7 +168,7 @@ const CategoryPieChart = ({ data, loading = false, currency = 'ZAR' }) => {
                     backgroundColor: `${cat.color}10`
                   } : {}}
                 >
-                  <div className="category-chart__item-info">
+                  <div className="category-chart__item-info" >
                     <div 
                       className="category-chart__item-icon"
                       style={{ backgroundColor: `${cat.color}15` }}

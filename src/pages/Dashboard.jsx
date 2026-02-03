@@ -2,8 +2,6 @@
 import {
   AlertCircle,
   CreditCard,
-  Filter,
-  RefreshCw,
   Tag,
   TrendingUp,
   Wallet
@@ -32,9 +30,13 @@ import { formatCurrency, getPeriodLabel } from '../utils/formatters';
 const Dashboard = () => {
   const { 
     selectedPeriod,
+    setSelectedPeriod,
     categoryFilter,
+    setCategoryFilter,
     dateRange,
+    setdateRange,
     sortBy,
+    setSortBy,
     resetFilters,
     hasActiveFilters
   } = useDashboard();
@@ -59,12 +61,14 @@ const Dashboard = () => {
     isLoading: summaryLoading,
     refetch: refetchSummary 
   } = useSpendingSummary(selectedPeriod);
+
   
   const { 
     data: categories, 
     isLoading: categoriesLoading,
     refetch: refetchCategories 
   } = useSpendingCategories(selectedPeriod);
+
   
   const { 
     data: trends, 
@@ -100,8 +104,8 @@ const Dashboard = () => {
 
   // Handle period change
   const handlePeriodChange = useCallback((newPeriod) => {
-    // The period is managed by DashboardContext
-    console.log('Period changed to:', newPeriod);
+    setSelectedPeriod(newPeriod);
+    
   }, []);
 
   // Show loading state on initial load
@@ -113,35 +117,6 @@ const Dashboard = () => {
 
   return (
     <div className="dashboard">
-      {/* Dashboard Header */}
-      <header className="dashboard-header">
-        <div className="dashboard-header__info">
-          <h1 className="dashboard-header__title">Spending Insights</h1>
-          <p className="dashboard-header__subtitle">
-            Welcome back, {user?.name || customer?.name || 'Customer'}
-          </p>
-        </div>
-        <div className="dashboard-header__actions">
-          <button
-            onClick={handleRefresh}
-            className="button button--secondary button--sm"
-            disabled={summaryLoading}
-            title="Refresh data"
-          >
-            <RefreshCw size={16} className={summaryLoading ? 'animate-spin' : ''} />
-            <span>Refresh</span>
-          </button>
-          {hasActiveFilters && (
-            <button
-              onClick={resetFilters}
-              className="button button--outline button--sm"
-            >
-              <Filter size={16} />
-              <span>Clear Filters</span>
-            </button>
-          )}
-        </div>
-      </header>
 
       <main className="dashboard__main">
         {/* Customer Profile Header */}

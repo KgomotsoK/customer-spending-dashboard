@@ -49,7 +49,7 @@ export const CustomerService = {
     const id = customerId || getCurrentCustomerId();
     return apiClient.get(`/customers/${id}/spending/categories.json`, {
       params: { period, startDate, endDate }
-    }).then(data => data[period] || data['30d']);
+    });
   },
 
   /**

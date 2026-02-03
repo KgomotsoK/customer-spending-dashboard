@@ -72,6 +72,7 @@ export const useSpendingCategories = (period = '30d') => {
     setError(null);
     try {
       const result = await CustomerService.getSpendingCategories({ period });
+      
       setData(result);
     } catch (err) {
       setError(err.message || 'Failed to fetch spending categories');
