@@ -1,0 +1,12 @@
+{
+    "data": [
+        {
+            "id": "1",
+            "customerId": "12345",
+            "name": "John Doe",
+            "email": "john.doe@email.com",
+            "password": "John@26",
+            "createdAt": "2023-01-15T10:00:00Z"
+        }
+    ] 
+}

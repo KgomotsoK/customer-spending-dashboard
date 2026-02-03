@@ -1,0 +1,46 @@
+{
+  "7d": {
+    "period": "7d",
+    "totalSpent": 8245.50,
+    "transactionCount": 23,
+    "averageTransaction": 358.50,
+    "topCategory": "Groceries",
+    "comparedToPrevious": {
+      "spentChange": -12.5,
+      "transactionChange": -8.3
+    }
+  },
+  "30d": {
+    "period": "30d",
+    "totalSpent": 32890.25,
+    "transactionCount": 87,
+    "averageTransaction": 378.05,
+    "topCategory": "Groceries",
+    "comparedToPrevious": {
+      "spentChange": 5.8,
+      "transactionChange": 12.1
+    }
+  },
+  "90d": {
+    "period": "90d",
+    "totalSpent": 98670.75,
+    "transactionCount": 256,
+    "averageTransaction": 385.43,
+    "topCategory": "Utilities",
+    "comparedToPrevious": {
+      "spentChange": -3.2,
+      "transactionChange": 2.5
+    }
+  },
+  "1y": {
+    "period": "1y",
+    "totalSpent": 187450.75,
+    "transactionCount": 892,
+    "averageTransaction": 210.15,
+    "topCategory": "Groceries",
+    "comparedToPrevious": {
+      "spentChange": 15.3,
+      "transactionChange": 18.7
+    }
+  }
+}

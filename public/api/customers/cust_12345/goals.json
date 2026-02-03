@@ -1,0 +1,49 @@
+{
+  "goals": [
+    {
+      "id": "goal_001",
+      "category": "Groceries",
+      "monthlyBudget": 10000,
+      "currentSpent": 8540.50,
+      "percentageUsed": 85.4,
+      "daysRemaining": 8,
+      "status": "warning"
+    },
+    {
+      "id": "goal_002",
+      "category": "Entertainment",
+      "monthlyBudget": 3000,
+      "currentSpent": 1850.00,
+      "percentageUsed": 61.7,
+      "daysRemaining": 8,
+      "status": "on_track"
+    },
+    {
+      "id": "goal_003",
+      "category": "Dining",
+      "monthlyBudget": 4000,
+      "currentSpent": 3890.50,
+      "percentageUsed": 97.3,
+      "daysRemaining": 8,
+      "status": "warning"
+    },
+    {
+      "id": "goal_004",
+      "category": "Transport",
+      "monthlyBudget": 6000,
+      "currentSpent": 3420.75,
+      "percentageUsed": 57.0,
+      "daysRemaining": 8,
+      "status": "on_track"
+    },
+    {
+      "id": "goal_005",
+      "category": "Utilities",
+      "monthlyBudget": 8000,
+      "currentSpent": 6890.00,
+      "percentageUsed": 86.1,
+      "daysRemaining": 8,
+      "status": "warning"
+    }
+  ]
+}

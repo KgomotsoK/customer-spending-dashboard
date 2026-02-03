@@ -1,0 +1,201 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+body {
+    margin: 0;
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", sans-serif;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+
+code {
+    font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New", monospace;
+}
+
+@layer base {
+    :root {
+        /* Modern Blue Banking Palette - #2F70EF */
+        --background: 210 40% 98%;
+        --foreground: 222 47% 11%;
+        --card: 0 0% 100%;
+        --card-foreground: 222 47% 11%;
+        --popover: 0 0% 100%;
+        --popover-foreground: 222 47% 11%;
+        
+        /* Primary: Blue #2F70EF - Trust & Professionalism */
+        --primary: 220 86% 56%;
+        --primary-foreground: 0 0% 100%;
+        --primary-light: 220 80% 96%;
+        --primary-dark: 220 90% 45%;
+        
+        /* Secondary: Cyan/Teal - Accent */
+        --secondary: 174 72% 56%;
+        --secondary-foreground: 222 47% 11%;
+        --secondary-light: 174 60% 94%;
+        
+        /* Accent: Deep Blue */
+        --accent: 222 65% 33%;
+        --accent-foreground: 0 0% 100%;
+        
+        /* Muted tones */
+        --muted: 210 40% 96%;
+        --muted-foreground: 215 16% 47%;
+        
+        /* Status Colors */
+        --success: 142 76% 36%;
+        --success-foreground: 0 0% 100%;
+        --success-light: 142 60% 94%;
+        
+        --warning: 38 92% 50%;
+        --warning-foreground: 0 0% 100%;
+        --warning-light: 38 100% 94%;
+        
+        --destructive: 0 84% 60%;
+        --destructive-foreground: 0 0% 100%;
+        --destructive-light: 0 100% 96%;
+        
+        /* Borders & Inputs */
+        --border: 214 32% 91%;
+        --input: 214 32% 91%;
+        --ring: 220 86% 56%;
+        
+        /* Chart Colors - Banking themed */
+        --chart-1: 220 86% 56%;
+        --chart-2: 174 72% 56%;
+        --chart-3: 222 65% 33%;
+        --chart-4: 142 76% 36%;
+        --chart-5: 38 92% 50%;
+        --chart-6: 340 82% 52%;
+        --chart-7: 262 83% 58%;
+        --chart-8: 24 95% 53%;
+        
+        /* Spacing & Radius */
+        --radius: 0.625rem;
+        
+        /* Shadows */
+        --shadow-sm: 0 1px 2px 0 hsl(222 47% 11% / 0.05);
+        --shadow-md: 0 4px 6px -1px hsl(222 47% 11% / 0.1), 0 2px 4px -2px hsl(222 47% 11% / 0.1);
+        --shadow-lg: 0 10px 15px -3px hsl(222 47% 11% / 0.1), 0 4px 6px -4px hsl(222 47% 11% / 0.1);
+        --shadow-card: 0 1px 3px 0 hsl(222 47% 11% / 0.1), 0 1px 2px -1px hsl(222 47% 11% / 0.1);
+        
+        /* Transitions */
+        --transition-fast: 150ms cubic-bezier(0.4, 0, 0.2, 1);
+        --transition-normal: 200ms cubic-bezier(0.4, 0, 0.2, 1);
+        --transition-slow: 300ms cubic-bezier(0.4, 0, 0.2, 1);
+    }
+    
+    .dark {
+        --background: 222 47% 8%;
+        --foreground: 210 40% 98%;
+        --card: 222 47% 11%;
+        --card-foreground: 210 40% 98%;
+        --popover: 222 47% 11%;
+        --popover-foreground: 210 40% 98%;
+        --primary: 220 86% 65%;
+        --primary-foreground: 222 47% 8%;
+        --primary-light: 220 50% 15%;
+        --primary-dark: 220 90% 70%;
+        --secondary: 174 70% 50%;
+        --secondary-foreground: 222 47% 8%;
+        --secondary-light: 174 40% 15%;
+        --accent: 222 65% 50%;
+        --accent-foreground: 0 0% 100%;
+        --muted: 222 47% 15%;
+        --muted-foreground: 215 20% 65%;
+        --success: 142 70% 45%;
+        --success-foreground: 222 47% 8%;
+        --success-light: 142 40% 15%;
+        --warning: 38 90% 55%;
+        --warning-foreground: 222 47% 8%;
+        --warning-light: 38 50% 15%;
+        --destructive: 0 80% 55%;
+        --destructive-foreground: 0 0% 100%;
+        --destructive-light: 0 50% 15%;
+        --border: 222 47% 20%;
+        --input: 222 47% 20%;
+        --ring: 171 70% 45%;
+        --chart-1: 171 70% 45%;
+        --chart-2: 211 100% 60%;
+        --chart-3: 222 65% 50%;
+        --chart-4: 142 70% 45%;
+        --chart-5: 38 90% 55%;
+        --chart-6: 340 80% 60%;
+        --chart-7: 262 80% 65%;
+        --chart-8: 24 90% 60%;
+    }
+}
+
+@layer base {
+    * {
+        @apply border-border;
+    }
+    body {
+        @apply bg-background text-foreground;
+    }
+}
+
+/* Scrollbar styling */
+::-webkit-scrollbar {
+    width: 8px;
+    height: 8px;
+}
+
+::-webkit-scrollbar-track {
+    background: hsl(var(--muted));
+    border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb {
+    background: hsl(var(--border));
+    border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: hsl(var(--muted-foreground) / 0.5);
+}
+
+/* Animation utilities */
+.animate-in {
+    animation: fade-in 0.3s ease-out forwards;
+}
+
+/* Custom focus styles */
+*:focus-visible {
+    outline: 2px solid hsl(var(--ring));
+    outline-offset: 2px;
+}
+
+@layer base {
+    [data-debug-wrapper="true"] {
+        display: contents !important;
+    }
+
+    [data-debug-wrapper="true"] > * {
+        margin-left: inherit;
+        margin-right: inherit;
+        margin-top: inherit;
+        margin-bottom: inherit;
+        padding-left: inherit;
+        padding-right: inherit;
+        padding-top: inherit;
+        padding-bottom: inherit;
+        column-gap: inherit;
+        row-gap: inherit;
+        gap: inherit;
+        border-left-width: inherit;
+        border-right-width: inherit;
+        border-top-width: inherit;
+        border-bottom-width: inherit;
+        border-left-style: inherit;
+        border-right-style: inherit;
+        border-top-style: inherit;
+        border-bottom-style: inherit;
+        border-left-color: inherit;
+        border-right-color: inherit;
+        border-top-color: inherit;
+        border-bottom-color: inherit;
+    }
+}

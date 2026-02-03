@@ -1,0 +1,16 @@
+{
+  "trends": [
+    { "month": "2024-01", "totalSpent": 14250.50, "transactionCount": 68, "averageTransaction": 209.56 },
+    { "month": "2024-02", "totalSpent": 15890.25, "transactionCount": 72, "averageTransaction": 220.70 },
+    { "month": "2024-03", "totalSpent": 13450.00, "transactionCount": 65, "averageTransaction": 206.92 },
+    { "month": "2024-04", "totalSpent": 16780.75, "transactionCount": 78, "averageTransaction": 215.14 },
+    { "month": "2024-05", "totalSpent": 15230.50, "transactionCount": 71, "averageTransaction": 214.51 },
+    { "month": "2024-06", "totalSpent": 18920.25, "transactionCount": 85, "averageTransaction": 222.59 },
+    { "month": "2024-07", "totalSpent": 14580.00, "transactionCount": 69, "averageTransaction": 211.30 },
+    { "month": "2024-08", "totalSpent": 17340.75, "transactionCount": 80, "averageTransaction": 216.76 },
+    { "month": "2024-09", "totalSpent": 16120.50, "transactionCount": 75, "averageTransaction": 214.94 },
+    { "month": "2024-10", "totalSpent": 15670.25, "transactionCount": 73, "averageTransaction": 214.66 },
+    { "month": "2024-11", "totalSpent": 18450.00, "transactionCount": 82, "averageTransaction": 225.00 },
+    { "month": "2024-12", "totalSpent": 20768.00, "transactionCount": 74, "averageTransaction": 280.65 }
+  ]
+}

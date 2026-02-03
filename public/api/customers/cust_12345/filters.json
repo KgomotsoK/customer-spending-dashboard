@@ -1,0 +1,17 @@
+{
+  "categories": [
+    { "name": "Groceries", "color": "#2F70EF", "icon": "shopping-cart" },
+    { "name": "Utilities", "color": "#4ECDC4", "icon": "zap" },
+    { "name": "Transport", "color": "#1E3A8A", "icon": "car" },
+    { "name": "Entertainment", "color": "#F59E0B", "icon": "film" },
+    { "name": "Dining", "color": "#EF4444", "icon": "utensils" },
+    { "name": "Shopping", "color": "#8B5CF6", "icon": "shopping-bag" },
+    { "name": "Healthcare", "color": "#10B981", "icon": "heart" }
+  ],
+  "dateRangePresets": [
+    { "label": "Last 7 days", "value": "7d" },
+    { "label": "Last 30 days", "value": "30d" },
+    { "label": "Last 90 days", "value": "90d" },
+    { "label": "Last year", "value": "1y" }
+  ]
+}

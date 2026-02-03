@@ -1,0 +1,65 @@
+{
+  "dateRange": {
+    "startDate": "2024-12-01",
+    "endDate": "2024-12-31"
+  },
+  "totalAmount": 32890.25,
+  "categories": [
+    {
+      "name": "Groceries",
+      "amount": 8540.50,
+      "percentage": 26,
+      "transactionCount": 24,
+      "color": "#2F70EF",
+      "icon": "shopping-cart"
+    },
+    {
+      "name": "Utilities",
+      "amount": 6890.00,
+      "percentage": 21,
+      "transactionCount": 8,
+      "color": "#4ECDC4",
+      "icon": "zap"
+    },
+    {
+      "name": "Transport",
+      "amount": 5420.75,
+      "percentage": 16,
+      "transactionCount": 32,
+      "color": "#1E3A8A",
+      "icon": "car"
+    },
+    {
+      "name": "Entertainment",
+      "amount": 4250.00,
+      "percentage": 13,
+      "transactionCount": 12,
+      "color": "#F59E0B",
+      "icon": "film"
+    },
+    {
+      "name": "Dining",
+      "amount": 3890.50,
+      "percentage": 12,
+      "transactionCount": 18,
+      "color": "#EF4444",
+      "icon": "utensils"
+    },
+    {
+      "name": "Shopping",
+      "amount": 2450.25,
+      "percentage": 7,
+      "transactionCount": 8,
+      "color": "#8B5CF6",
+      "icon": "shopping-bag"
+    },
+    {
+      "name": "Healthcare",
+      "amount": 1448.25,
+      "percentage": 5,
+      "transactionCount": 5,
+      "color": "#10B981",
+      "icon": "heart"
+    }
+  ]
+}

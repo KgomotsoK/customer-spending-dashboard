@@ -1,0 +1,9 @@
+{
+  "customerId": "cust_12345",
+  "name": "John Doe",
+  "email": "john.doe@email.co.za",
+  "joinDate": "2023-01-15",
+  "accountType": "Premium",
+  "totalSpent": 15420.50,
+  "currency": "ZAR"
+}
