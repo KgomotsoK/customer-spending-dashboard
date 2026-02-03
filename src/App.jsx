@@ -6,7 +6,7 @@ import { Navigate, Route, BrowserRouter as Router, Routes } from 'react-router-d
 import ErrorFallback from './components/feedback/ErrorFallback';
 import LoadingScreen from './components/feedback/LoadingScreen';
 import Header from './components/layout/Header';
-import { ToastProvider } from './components/ui/Toast';
+import { ToastProvider } from './components/ui/toast';
 import { AuthProvider, useAuth } from './context/AuthContext';
 import { DashboardProvider } from './context/DashboardContext';
 import MaintenancePage from './pages/MaintanancePage';
@@ -128,7 +128,6 @@ function App() {
       // Initialize performance monitoring
       const observer = new PerformanceObserver((list) => {
         list.getEntries().forEach((entry) => {
-          console.log(`[Performance] ${entry.name}: ${entry.duration}ms`);
         });
       });
       observer.observe({ entryTypes: ['measure', 'resource'] });
