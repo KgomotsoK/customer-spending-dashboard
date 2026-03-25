@@ -144,12 +144,12 @@ yarn test src/api/__tests__/authService.test.js
 
 ### Build the Docker image:
 ```bash
-docker build -t spending-insights-main .
+yarn/npm run docker:build
 ```
 
 ### Run the container:
 ```bash
-docker run -p 3000:3000 spending-insights-main
+yarn/npm run docker:run
 ```
 
 ### Access the application:
